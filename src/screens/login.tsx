@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -37,16 +37,35 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen: React.FC = () => {
+	const [nomeUsuario, setNomeUsuario] = useState('');
+	const [senha, setSenha] = useState('');
+
+	const [mostraErro, setMostraErro] = useState(false);
+	const [mostraSucesso, setMostraSucesso] = useState(false);
+
 	return (
 		<View style={styles.container}>
-			<View style={styles.alertaErro}>
-				<Text>ERRO: Login inválido.</Text>
-			</View>
-			<View style={styles.alertaSucesso}>
-				<Text>SUCESSO: Bem-vindo.</Text>
-			</View>
-			<TextInput placeholder='Nome de usuário' />
-			<TextInput placeholder='Senha' />
+			{
+				mostraErro &&
+				<View style={styles.alertaErro}>
+					<Text>ERRO: Login inválido.</Text>
+				</View>
+			}
+			{
+				mostraSucesso &&
+				<View style={styles.alertaSucesso}>
+					<Text>SUCESSO: Bem-vindo.</Text>
+				</View>
+			}
+			
+			<TextInput
+				placeholder='Nome de usuário'
+				onChangeText={setNomeUsuario}
+			/>
+			<TextInput
+				placeholder='Senha'
+				onChangeText={setSenha}
+			/>
 			<TouchableOpacity style={styles.button}>
 				<Text style={styles.buttonText}>Entrar</Text>
 			</TouchableOpacity>
