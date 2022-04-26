@@ -43,6 +43,12 @@ const LoginScreen: React.FC = () => {
 	const [mostraErro, setMostraErro] = useState(false);
 	const [mostraSucesso, setMostraSucesso] = useState(false);
 
+	const botaoEntrarPressionado = () => {
+		const loginCorreto = (nomeUsuario === 'adm') && (senha === '123');
+		setMostraSucesso(loginCorreto)
+		setMostraErro(!loginCorreto)
+	};
+
 	return (
 		<View style={styles.container}>
 			{
@@ -66,7 +72,7 @@ const LoginScreen: React.FC = () => {
 				placeholder='Senha'
 				onChangeText={setSenha}
 			/>
-			<TouchableOpacity style={styles.button}>
+			<TouchableOpacity style={styles.button} onPress={botaoEntrarPressionado}>
 				<Text style={styles.buttonText}>Entrar</Text>
 			</TouchableOpacity>
 		</View>
