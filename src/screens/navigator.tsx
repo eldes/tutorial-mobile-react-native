@@ -19,7 +19,11 @@ const Navigator: React.FC = () => {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Item" component={ItemScreen} />
+        <Stack.Screen
+          name="Item"
+          component={ItemScreen}
+          options={({ route }) => ({ title: route.params.item.nome })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
