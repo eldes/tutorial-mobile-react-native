@@ -1,11 +1,17 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { StackParamList } from './navigator';
 
-const ItemScreen: React.FC = () => {
+type Props = NativeStackScreenProps<StackParamList, 'Item'>;
+
+const ItemScreen: React.FC<Props> = props => {
+  const route = props.route;
+
   return (
     <View>
-      <Text>Nome do item</Text>
-      <Text>Descrição do item</Text>
+      <Text>{route.params.item.nome}</Text>
+      <Text>{route.params.item.descricao}</Text>
     </View>
   );
 };

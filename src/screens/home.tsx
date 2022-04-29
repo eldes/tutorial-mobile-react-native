@@ -1,6 +1,15 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { FlatList, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Item from '../models/item';
+import { StackParamList } from './navigator';
+import {
+  FlatList,
+  ListRenderItem,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const itens: Item[] = [
   {
@@ -138,7 +147,7 @@ const itens: Item[] = [
     nome: 'Cachorro-quente',
     descricao: 'Lanche grande.',
   },
-]
+];
 
 const styles = StyleSheet.create({
   container: {
@@ -179,17 +188,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textTransform: 'uppercase',
   },
-})
+});
 
-const HomeScreen: React.FC = () => {
+type Props = NativeStackScreenProps<StackParamList, 'Home'>;
 
-  const renderFlatListItem: ListRenderItem<Item> = ({item}) => {
+const HomeScreen: React.FC<Props> = props => {
+  const renderFlatListItem: ListRenderItem<Item> = ({ item }) => {
+    const itemClicado = () => {
+      props.navigation.navigate('Item', { item });
+    };
+
     return (
-      <View style={styles.listItem}>
+      <TouchableOpacity style={styles.listItem} onPress={itemClicado}>
         <Text style={styles.listItemText}>{item.nome}</Text>
-      </View>
-    )
-  }
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -204,7 +218,7 @@ const HomeScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 };
 
 export default HomeScreen;
