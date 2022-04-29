@@ -1,3 +1,4 @@
+import { StackActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { StackParamList } from './navigator';
@@ -59,7 +60,7 @@ const LoginScreen: React.FC<Props> = props => {
     setMostraErro(!loginCorreto);
 
     if (loginCorreto) {
-      props.navigation.navigate('Home');
+      props.navigation.dispatch(StackActions.replace('Home'));
     }
   };
 
